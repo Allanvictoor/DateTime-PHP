@@ -31,29 +31,55 @@ Observações:
 - A configuração quantidade ou termina_em devem ser informados obrigatoriamente para uma repetição.
 
 #### Testes de Mesa
-|          Entrada          |        Saída        |
-|---------------------------|---------------------|
-| Data Inicial: 03/02/2020  | - 01/04/2020        | 
-| Repetição:                | - 01/05/2020        |
-| frequencia: mensal        | - 01/06/2020        |
-| por_dia_mes: 1            | - 01/07/2020        |
-| termina_em: 01/09/2020    | - 01/08/2020        |
-|                           | - 01/09/2020        |
-|---------------------------|---------------------|
-| teste                     |                     |
-|---------------------------|---------------------|
 
-01/09/2020, 01/10/2020, 01/10/2020, 01/11/2020, 01/12/2020
+---
 
-Data Inicial: 03/02/2020
+##### Exemplo 1
+Entrada:
+```php
+$dataInicio = new \DateTime();
+$dataInicio->setDate(2020, 02, 03);
+$datas = calcularRepeticoes($dataInicio, [
+  'frequencia' => 'mensal',
+  'por_dia_mes' => 1,
+  'termina_em': '2020-09-01'
+]);
+```
 
-Repetição:
-frequencia: semanal
-por_dia: 1 // seg
-quantidade: 3
+Saída:
+```php
+array(8) {
+  [0] => 01/02/2020
+  [1] => 01/03/2020
+  [2] => 01/04/2020
+  [3] => 01/05/2020
+  [4] => 01/06/2020
+  [5] => 01/07/2020
+  [6] => 01/08/2020
+  [7] => 01/09/2020
+}
+```
 
-10/02/2020
-17/02/2020
-24/02/2020
+---
 
+##### Exemplo 2
+
+Entrada:
+```php
+$dataInicio = new \DateTime();
+$dataInicio->setDate(2020, 02, 03);
+$datas = calcularRepeticoes($dataInicio, [
+  'frequencia' => 'semanal',
+  'por_dia_mes' => 1,
+  'quantidade' => 3
+}
+```
+
+Saída:
+```php
+array(3) {
+  [0] => 03/02/2020
+  [1] => 10/03/2020
+  [2] => 17/03/2020
+```
 
