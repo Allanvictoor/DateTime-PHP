@@ -83,3 +83,9 @@ array(3) {
   [2] => 17/03/2020
 ```
 
+---
+---
+---
+Desenvolvido por:
+
+![Vivaweb](https://avatars2.githubusercontent.com/u/6058802?s=200&v=4)
