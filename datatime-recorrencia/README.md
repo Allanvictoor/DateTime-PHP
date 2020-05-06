@@ -35,52 +35,45 @@ Observações:
 ---
 
 ##### Exemplo 1
-Entrada:
 ```php
-$dataInicio = new \DateTime();
-$dataInicio->setDate(2020, 02, 03);
-$datas = calcularRepeticoes($dataInicio, [
+
+$inicio1 = new \DateTime('2020-02-01');
+
+$recorrencia1 = [
   'frequencia' => 'mensal',
   'por_dia_mes' => 1,
-  'termina_em': '2020-09-01'
-]);
-```
+  'termina_em'=> '2020-09-01'
+];
 
-Saída:
-```php
-array(8) {
-  [0] => 01/02/2020
-  [1] => 01/03/2020
-  [2] => 01/04/2020
-  [3] => 01/05/2020
-  [4] => 01/06/2020
-  [5] => 01/07/2020
-  [6] => 01/08/2020
-  [7] => 01/09/2020
-}
+$resultadoEsperado1 = [
+    new \DateTime('2020-02-01'),
+    new \DateTime('2020-03-02'),
+    new \DateTime('2020-04-01'),
+    new \DateTime('2020-05-01'),
+    new \DateTime('2020-06-01'),
+    new \DateTime('2020-07-01'),
+    new \DateTime('2020-08-03'),
+    new \DateTime('2020-09-01')
+];
+
 ```
 
 ---
 
 ##### Exemplo 2
 
-Entrada:
 ```php
-$dataInicio = new \DateTime();
-$dataInicio->setDate(2020, 02, 03);
-$datas = calcularRepeticoes($dataInicio, [
+$inicio2 = new \DateTime('2020-02-03');
+$recorrencia2 = [
   'frequencia' => 'semanal',
   'por_dia_mes' => 1,
   'quantidade' => 3
-}
-```
-
-Saída:
-```php
-array(3) {
-  [0] => 03/02/2020
-  [1] => 10/03/2020
-  [2] => 17/03/2020
+];
+$resultadoEsperado2 = [
+    new \DateTime('2020-02-03'),
+    new \DateTime('2020-02-10'),
+    new \DateTime('2020-02-17'),
+];
 ```
 
 ---
