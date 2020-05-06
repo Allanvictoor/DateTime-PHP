@@ -3,7 +3,7 @@
 ### Informações Gerais
 
 #### Projeto Base
-Junto a esta missão você está recebendo uma documentação com os dados referentes à configuração de repetição e também um script php que servirá para testar a função que irá desenvolver.
+Junto a esta missão você está recebendo uma documentação com os dados referentes à configuração de repetição e também um ![script php](https://github.com/vivaweb/missoes-php/blob/master/datatime-recorrencia/test.php) que servirá para testar a função que irá desenvolver.
 
 #### Resultado Esperado
 Um evento de agenda pode ter uma repetição. A repetição por sua vez pode ser configurada com várias características como início e término da repetição, periodicidade da repetição como diária, semanal, mensal, anual dentre outras configurações. É esperado que seja desenvolvida uma função que receba (1) uma data de início, e (2) a configuração de uma repetição e em seguida ela retorne um array de datas baseados nesta repetição.
