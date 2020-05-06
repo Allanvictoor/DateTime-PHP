@@ -36,7 +36,6 @@ Observações:
 
 ##### Exemplo 1
 ```php
-
 $inicio1 = new \DateTime('2020-02-01');
 
 $recorrencia1 = [
@@ -64,11 +63,13 @@ $resultadoEsperado1 = [
 
 ```php
 $inicio2 = new \DateTime('2020-02-03');
+
 $recorrencia2 = [
   'frequencia' => 'semanal',
   'por_dia_mes' => 1,
   'quantidade' => 3
 ];
+
 $resultadoEsperado2 = [
     new \DateTime('2020-02-03'),
     new \DateTime('2020-02-10'),
