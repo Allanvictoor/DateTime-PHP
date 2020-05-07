@@ -71,7 +71,7 @@ $inicio2 = new \DateTime('2020-02-03');
 
 $recorrencia2 = [
   'frequencia' => 'semanal',
-  'por_dia_mes' => 1,
+  'por_dia' => 1,
   'quantidade' => 3
 ];
 
