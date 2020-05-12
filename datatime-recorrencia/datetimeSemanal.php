@@ -7,7 +7,7 @@ $intervaloDiario = new DateInterval('P1D');
 $intervaloSemanal = new DateInterval('P7D');
 $intervaloMensal = new DateInterval('P1M');
 $intervaloAnual = new DateInterval('P1Y');
-$quantidade = 4;
+$quantidade = 3;
 
 $periodo = new DatePeriod($dataInicial, $intervaloSemanal, $quantidade);
 
