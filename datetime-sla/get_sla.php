@@ -7,8 +7,7 @@ function get_sla(\DateTime $inicio, $sla)
     }
     $sla = (int) $sla;
 
-    // mexa a partir daqui
-    //
+    
 
     $prazo = new \DateTime();
 
