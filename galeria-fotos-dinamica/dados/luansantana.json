@@ -1,0 +1,9 @@
+{
+  'nmMae': 'Mãe do Luan Santana',
+  'urlFotoMae': './fotos/002.jpg',
+  'usuario': {
+    'nmUsuario': 'Luan Santana',
+    'urlAvatar': './../avatar/001.jpg',
+    'nmDepartamento': 'Sertanejo'
+  }
+}
