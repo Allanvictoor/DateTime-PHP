@@ -12,7 +12,7 @@ $recorrencia1 = [
 ];
 $resultadoEsperado1 = [
     new \DateTime('2020-02-01'),
-    new \DateTime('2020-03-02'),
+    new \DateTime('2020-03-01'),
     new \DateTime('2020-04-01'),
     new \DateTime('2020-05-01'),
     new \DateTime('2020-06-01'),
@@ -31,7 +31,7 @@ if ($datas1 != $resultadoEsperado1) {
 $inicio2 = new \DateTime('2020-02-03');
 $recorrencia2 = [
   'frequencia' => 'semanal',
-  'por_dia_mes' => 1,
+  'por_dia' => 1,
   'quantidade' => 3
 ];
 $resultadoEsperado2 = [
