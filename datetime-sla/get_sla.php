@@ -2,20 +2,21 @@
 
 function is_horautil(\DateTime $data)
 {
-    $data = new Datetime();
+    $horautil = clone $data;
 
-    $inicioDoPrimeiroTurno->setTime(8, 0, 0);
-    $fimDoPrimeiroTurno->setTime(11, 45, 0);
-    $inicioDoSegundoTurno->setTime(13, 0, 0);
-    $fimDoSegundoTurno->setTime(17, 0, 0);
+    $inicioDoPrimeiroTurno = clone $horautil->setTime(8, 0, 0);
+    $fimDoPrimeiroTurno = clone $horautil->setTime(11, 45, 0);
+    $inicioDoSegundoTurno = clone $horautil->setTime(13, 0, 0);
+    $fimDoSegundoTurno = clone $horautil->setTime(18, 0, 0);
 
-    if (($inicioDoPrimeiroTurno < $data && $data < $fimDoPrimeiroTurno) || ($inicioDoSegundoTurno < $data && $data < $fimDoSegundoTurno)) {
-        return true;;
+    if (($inicioDoPrimeiroTurno < $horautil && $horautil < $fimDoPrimeiroTurno) || ($inicioDoSegundoTurno < $horautil && $horautil < $fimDoSegundoTurno)) {
+        var_dump($fimDoPrimeiroTurno);
     }
+   
     
-  
+    
 }
-    
+
 
 
 /**
@@ -30,11 +31,10 @@ function get_sla(\DateTime $inicio, $sla)
         throw new \Exception('Informe um valor inteiro para SLA');
     }
     $sla = (int) $sla;
-
+    $slaEmMinutos = $sla * 60;
     
 
     $prazo = new DateTime($inicio->format('Y-m-d H:i'));
-    var_dump($prazo);
     $i = 0;
     while ($i < $slaEmMinutos) {
         // - adicione 1 minuto em $prazo
@@ -45,4 +45,6 @@ function get_sla(\DateTime $inicio, $sla)
     }
 
     return $prazo;
+
+    
 }
