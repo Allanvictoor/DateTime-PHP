@@ -2,10 +2,21 @@
 
 function is_horautil(\DateTime $data)
 {
-    // retorne true/false se a data/hora for útil
-    // de acordo com regras já definidas para projeto
-    return true;
+    $data = new Datetime();
+
+    $inicioDoPrimeiroTurno->setTime(8, 0, 0);
+    $fimDoPrimeiroTurno->setTime(11, 45, 0);
+    $inicioDoSegundoTurno->setTime(13, 0, 0);
+    $fimDoSegundoTurno->setTime(17, 0, 0);
+
+    if (($inicioDoPrimeiroTurno < $data && $data < $fimDoPrimeiroTurno) || ($inicioDoSegundoTurno < $data && $data < $fimDoSegundoTurno)) {
+        return true;;
+    }
+    
+  
 }
+    
+
 
 /**
  * @param \DateTime $inicio data de início
@@ -20,15 +31,10 @@ function get_sla(\DateTime $inicio, $sla)
     }
     $sla = (int) $sla;
 
-<<<<<<< HEAD
     
-=======
-    // ao converter pra minutos, podemos facilitar as coisas
-    $slaEmMinutos = $sla * 60;
->>>>>>> upstream/master
 
     $prazo = new DateTime($inicio->format('Y-m-d H:i'));
-
+    var_dump($prazo);
     $i = 0;
     while ($i < $slaEmMinutos) {
         // - adicione 1 minuto em $prazo
