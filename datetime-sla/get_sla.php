@@ -33,7 +33,6 @@ function get_sla(\DateTime $inicio, $sla)
     $sla = (int) $sla;
     $slaEmMinutos = $sla * 60;
     
-
     $prazo = new DateTime($inicio->format('Y-m-d H:i'));
     $i = 0;
     while ($i < $slaEmMinutos) {
@@ -42,9 +41,10 @@ function get_sla(\DateTime $inicio, $sla)
         if (is_horautil($prazo)) {
             $i++;
         }
+    
     }
 
     return $prazo;
 
-    
+
 }
