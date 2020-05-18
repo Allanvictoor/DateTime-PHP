@@ -10,7 +10,7 @@ function is_horautil(\DateTime $data)
     $fimDoSegundoTurno = clone $horautil->setTime(18, 0, 0);
 
     if (($inicioDoPrimeiroTurno < $horautil && $horautil < $fimDoPrimeiroTurno) || ($inicioDoSegundoTurno < $horautil && $horautil < $fimDoSegundoTurno)) {
-        var_dump($fimDoPrimeiroTurno);
+        return true;
     }
    
     
