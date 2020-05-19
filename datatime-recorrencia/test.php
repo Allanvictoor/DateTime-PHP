@@ -17,7 +17,7 @@ $resultadoEsperado1 = [
     new \DateTime('2020-05-01'),
     new \DateTime('2020-06-01'),
     new \DateTime('2020-07-01'),
-    new \DateTime('2020-08-03'),
+    new \DateTime('2020-08-01'),
     new \DateTime('2020-09-01')
 ];
 
