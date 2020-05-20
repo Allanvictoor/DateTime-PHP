@@ -19,7 +19,7 @@ function get_recorrencia(\DateTime $inicio, $options)
     $datas = [];
     foreach ($periodo as $data) {
             $datas[] = $data->format('d-m-Y');
-            print_r ($datas);
+            var_dump ($datas). "<br>";
     };
 }
 
