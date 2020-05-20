@@ -1,22 +1,18 @@
 <?php
 
-function is_horautil(\DateTime $data)
-{
-    $horautil = clone $data;
+function is_horautil(\DateTime $data ) {
 
-    $inicioDoPrimeiroTurno = clone $horautil->setTime(8, 0, 0);
-    $fimDoPrimeiroTurno = clone $horautil->setTime(11, 45, 0);
-    $inicioDoSegundoTurno = clone $horautil->setTime(13, 0, 0);
-    $fimDoSegundoTurno = clone $horautil->setTime(18, 0, 0);
+    $inicioPrimeiroTurno = clone $data->setTime(8, 0, 0);
+    $fimPrimeiroTurno = clone $data->setTime(11, 45, 0);
+    $inicioSegundoTurno = clone $data->setTime(13, 0, 0);
+    $fimSegundoTurno = clone $data->setTime(18, 0, 0);
 
-    if (($inicioDoPrimeiroTurno < $data && $data < $fimDoPrimeiroTurno) || ($inicioDoSegundoTurno < $data && $data < $fimDoSegundoTurno)) {
+    if (($data > $inicioPrimeiroTurno && $data < $fimPrimeiroTurno) || ($data > $inicioSegundoTurno && $data < $fimSegundoTurno)) {
         return true;
     }
- 
-     else  {
-     return false;
-     }   
+
     
+    return $data;
     
 }
 
@@ -42,18 +38,13 @@ function get_sla(\DateTime $inicio, $sla)
     $i = 0;
     while ($i < $slaEmMinutos) {
         
-        if (is_horautil($prazo)) {
-            $i++;
-            
-        }
-       
-        $minutos = new DateInterval("PT{$i}M");
-        $prazo->add($minutos);
-    
+            if( is_horautil($prazo)) {
+                $i++;
+            }
     
     }
 
-    return $prazo;
+    return $prazo->add(new DateInterval("PT{$i}M"));
 
 
 }
