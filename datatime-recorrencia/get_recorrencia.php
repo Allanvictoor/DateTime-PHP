@@ -12,35 +12,38 @@ function get_recorrencia(\DateTime $inicio, $options)
     $intervaloMensal = new DateInterval('P1M');
     $intervaloAnual = new DateInterval('P1Y');
     $dataFinal = new DateTime('2020-09-02'); //Data de encerramento
-    $repeticao = 0;
+    $quantidade = 3;
     
     $periodo = new DatePeriod($dataDeRepeticao, $intervaloMensal, $dataFinal);
-    
+    $periodoQuant = new DatePeriod($dataDeRepeticao, $intervaloSemanal, $quantidade);
+
+    $count = [];
     $datas = [];
     foreach ($periodo as $data) {
+        if ($datas < $dataFinal) {
             $datas[] = $data->format('d-m-Y');
-            var_dump ($datas). "<br>";
-    };
-}
+        
 
-   // teste recorrenhecia quantidade
+        }
+        $datas++;
+        var_dump ($datas). "<br>";
+        
+        
+        
+    }
 
-    $dataInicial = new DateTime('2020-02-03');
-    $intervaloDiario = new DateInterval('P1D');
-    $intervaloSemanal = new DateInterval('P7D');
-    $intervaloMensal = new DateInterval('P1M');
-    $intervaloAnual = new DateInterval('P1Y');
-    $quantidade = 3;
-
-    $periodo = new DatePeriod($dataInicial, $intervaloSemanal, $quantidade);
-
-    $count = 1;
-    foreach ($periodo as $data) {
-        if ($count <= $quantidade) {
-            echo $data->format('d-m-Y') . "<br>";
+    foreach ($periodoQuant as $data2) {
+        if ($count <= $periodoQuant) {
+            $count[] = $data2->format('d-m-Y') . "<br>";
         }
         $count++;
     }
 
-    return $datas;
+   
+    
+    return $data;
+    
+}
+
+  
 
