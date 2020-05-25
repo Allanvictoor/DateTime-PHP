@@ -11,13 +11,9 @@ function is_horautil(\DateTime $data ) {
         return true;
     }
 
-    
     return $data;
-    
+
 }
-
-
-
 
 
 /**
