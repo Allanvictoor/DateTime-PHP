@@ -6,6 +6,10 @@ function get_recorrencia(\DateTime $inicio, $options)
 
     $data_inicio = clone $inicio;
     $data_final = new DateTime($options["termina_em"]);
+    $repete_todo_dia =  $options["por_dia_mes"];
+    $data_inicio->setDate("NOW","NOW", "intval($repete_todo_dia)");
+    print_r($data_inicio);
+    exit();
     $diario = new DateInterval(' P1D');
     $semanal = new DateInterval('P1W');
     $mensal = new DateInterval('P1M');
@@ -50,6 +54,7 @@ function get_recorrencia(\DateTime $inicio, $options)
 
             foreach ($periodoMesal_date_final as $data) {
                 $dates[] = $data->format('Y-m-d');
+
             }
             print_r($dates);
 
@@ -63,7 +68,7 @@ function get_recorrencia(\DateTime $inicio, $options)
                 $dates[] = $data->format('Y-m-d');
             }
             print_r($dates);
-            
+
 
         }
 
