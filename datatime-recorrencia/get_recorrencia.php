@@ -4,11 +4,8 @@
 function get_recorrencia(\DateTime $inicio, $options)
 {
 
-
-
     $data_inicio = clone $inicio;
-    $repete_em = $data_inicio->setDate('','', $options['por_dia_mes']);
-    $data_final = new DateTime('2020-09-30');
+    $data_final = new DateTime($options["termina_em"]);
     $diario = new DateInterval(' P1D');
     $semanal = new DateInterval('P1W');
     $mensal = new DateInterval('P1M');
@@ -16,21 +13,27 @@ function get_recorrencia(\DateTime $inicio, $options)
     $quantidade = 3;
     $dates = [];
 
-    if ($options == $data_final) {
 
-        if ($inicio != null && $options['frequencia'] == "diario" && !$quantidade) {
+
+
+
+    if ($options["termina_em"] == true) {
+
+        if ($options['frequencia'] == "diario") {
 
             $periodoDiario_date_final = new DatePeriod($data_inicio, $diario, $data_final);
+
+
 
 
             foreach ($periodoDiario_date_final as $data) {
                 $dates[] = $data->format('d-m-Y');
             }
-            return $dates;
+
 
         }
 
-        if ($inicio != null && $options['frequencia'] == "semanal" && !$quantidade) {
+        if ($options['frequencia'] == "semanal") {
 
             $periodoSemanal_date_final = new DatePeriod($data_inicio, $semanal, $data_final);
 
@@ -40,7 +43,7 @@ function get_recorrencia(\DateTime $inicio, $options)
             return $dates;
         }
 
-        if ($inicio != null && $options['frequencia'] == "mensal" && !$quantidade) {
+        if ($options['frequencia'] == "mensal") {
 
             $periodoMesal_date_final = new DatePeriod($data_inicio, $mensal, $data_final);
 
@@ -48,9 +51,11 @@ function get_recorrencia(\DateTime $inicio, $options)
                 $dates[] = $data->format('Y-m-d');
             }
             return $dates;
+            var_dump ($periodoMesal_date_final);
+            exit();
         }
 
-        if ($inicio != null && $options['frequencia'] == "anual" && !$quantidade) {
+        if ($options['frequencia'] == "anual") {
 
             $periodoAnual_date_final = new DatePeriod($data_inicio, $anual, $data_final);
 
@@ -63,9 +68,11 @@ function get_recorrencia(\DateTime $inicio, $options)
 
 
 
+
     }
 
-    if ($options == $quantidade) {
+
+    else {
 
         if ($inicio != null && $options == $diario && $quantidade == true) {
 
