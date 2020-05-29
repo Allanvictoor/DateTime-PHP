@@ -17,18 +17,18 @@ function get_recorrencia(\DateTime $inicio, $options)
 
 
 
-    if ($options["termina_em"] == true) {
 
         if ($options['frequencia'] == "diario") {
 
             $periodoDiario_date_final = new DatePeriod($data_inicio, $diario, $data_final);
 
-
-
-
             foreach ($periodoDiario_date_final as $data) {
                 $dates[] = $data->format('d-m-Y');
+
+
             }
+
+            print_r($dates);
 
 
         }
@@ -40,7 +40,8 @@ function get_recorrencia(\DateTime $inicio, $options)
             foreach ($periodoSemanal_date_final as $data) {
                 $dates[] = $data->format('Y-m-d');
             }
-            return $dates;
+            print_r($dates);
+
         }
 
         if ($options['frequencia'] == "mensal") {
@@ -50,9 +51,8 @@ function get_recorrencia(\DateTime $inicio, $options)
             foreach ($periodoMesal_date_final as $data) {
                 $dates[] = $data->format('Y-m-d');
             }
-            return $dates;
-            var_dump ($periodoMesal_date_final);
-            exit();
+            print_r($dates);
+
         }
 
         if ($options['frequencia'] == "anual") {
@@ -62,14 +62,15 @@ function get_recorrencia(\DateTime $inicio, $options)
             foreach ($periodoAnual_date_final as $data) {
                 $dates[] = $data->format('Y-m-d');
             }
-            return $dates;
+            print_r($dates);
+            
 
         }
 
 
 
 
-    }
+
 
 
     else {
