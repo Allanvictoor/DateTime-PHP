@@ -4,6 +4,8 @@
 function get_recorrencia(\DateTime $inicio, $options)
 {
     $data_inicio = clone $inicio;
+    //$por_dia_mes = $options['por_dia_mes'];
+    //$data_inicio->setDate(2020,02, $por_dia_mes);
     $data_final = new DateTime($options["termina_em"]);
     $diario = new DateInterval(' P1D');
     $semanal = new DateInterval('P1W');
