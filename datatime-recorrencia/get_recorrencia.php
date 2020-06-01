@@ -91,13 +91,6 @@ function get_recorrencia(\DateTime $inicio, $options)
         }
 
 
-
-
-
-
-
-
-
         if ($options['frequencia'] == 'diario' && $options['termina_em'] == null) {
             $quantidade = $options['quantidade'];
             $quantidade = $quantidade - 1;
@@ -137,16 +130,6 @@ function get_recorrencia(\DateTime $inicio, $options)
             }
             print_r($dates);
         }
-
-
-
-
-
-
-
-
-
-
 
         return $dates ;
 
