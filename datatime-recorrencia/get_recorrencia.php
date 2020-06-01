@@ -6,10 +6,6 @@ function get_recorrencia(\DateTime $inicio, $options)
 
     $data_inicio = clone $inicio;
     $data_final = new DateTime($options["termina_em"]);
-    $repete_todo_dia =  $options["por_dia_mes"];
-    $data_inicio->setDate("NOW","NOW", "intval($repete_todo_dia)");
-    print_r($data_inicio);
-    exit();
     $diario = new DateInterval(' P1D');
     $semanal = new DateInterval('P1W');
     $mensal = new DateInterval('P1M');
@@ -20,14 +16,12 @@ function get_recorrencia(\DateTime $inicio, $options)
 
 
 
-
-
         if ($options['frequencia'] == "diario") {
 
             $periodoDiario_date_final = new DatePeriod($data_inicio, $diario, $data_final);
 
             foreach ($periodoDiario_date_final as $data) {
-                $dates[] = $data->format('d-m-Y');
+                $dates[] = $data;
 
 
             }
@@ -36,6 +30,7 @@ function get_recorrencia(\DateTime $inicio, $options)
 
 
         }
+
 
         if ($options['frequencia'] == "semanal") {
 
@@ -47,6 +42,7 @@ function get_recorrencia(\DateTime $inicio, $options)
             print_r($dates);
 
         }
+
 
         if ($options['frequencia'] == "mensal") {
 
@@ -60,12 +56,13 @@ function get_recorrencia(\DateTime $inicio, $options)
 
         }
 
+
         if ($options['frequencia'] == "anual") {
 
             $periodoAnual_date_final = new DatePeriod($data_inicio, $anual, $data_final);
 
             foreach ($periodoAnual_date_final as $data) {
-                $dates[] = $data->format('Y-m-d');
+                $dates[] = new DateTime($data);
             }
             print_r($dates);
 
@@ -73,55 +70,48 @@ function get_recorrencia(\DateTime $inicio, $options)
         }
 
 
+        if (!$options["termina_em"] && $options["frequencia"] == "diario") {
+            $quantidade_diaria = new DatePeriod($data_inicio, $diario, $quantidade);
 
-
-
-
-
-    else {
-
-        if ($inicio != null && $options == $diario && $quantidade == true) {
-
-            $periodoDiario_quantidade = new DatePeriod($data_inicio, $diario, $quantidade);
-
-            foreach ($periodoDiario_quantidade as $data) {
-                $dates[] = $data->format('d-m-Y');
+            foreach ($quantidade_diaria as $data) {
+                $dates[] = new DateTime($data);
             }
-            return $dates;
-
+            print_r($dates);
         }
 
-        if ($inicio != null && $options == $semanal && $quantidade == true) {
 
-            $periodoSemanal_quantidade = new DatePeriod($data_inicio, $semanal, $quantidade);
+        if (!$options["termina_em"] && $options["frequencia"] == "semanal") {
+            $quantidade_semanal = new DatePeriod($data_inicio, $diario, $quantidade);
 
-            foreach ($periodoSemanal_quantidade as $data) {
-                $dates[] = $data->format('Y-m-d');
+            foreach ($quantidade_semanal as $data) {
+                $dates[] = new DateTime($data);
             }
-            return $dates;
+            print_r($dates);
         }
 
-        if ($inicio != null && $options == $mensal && $quantidade == true) {
 
-            $periodoMensal_quantidade = new DatePeriod($data_inicio, $mensal, $quantidade);
+        if (!$options["termina_em"] && $options["frequencia"] == "mensal") {
+            $quantidade_mensal = new DatePeriod($data_inicio, $diario, $quantidade);
 
-            foreach ($periodoMensal_quantidade as $data) {
-                $dates[] = $data->format('Y-m-d');
+            foreach ($quantidade_mensal as $data) {
+                $dates[] = new DateTime($data);
             }
-            return $dates;
+            print_r($dates);
         }
 
-        if ($inicio != null && $options == $anual && $quantidade == true) {
 
-            $periodoAnual_quantidade = new DatePeriod($data_inicio, $anual, $quantidade);
+        if (!$options["termina_em"] && $options["frequencia"] == "anual") {
+            $quantidade_anual = new DatePeriod($data_inicio, $diario, $quantidade);
 
-            foreach ($periodoAnual_quantidade as $data) {
-                $dates[] = $data->format('Y-m-d');
+            foreach ($quantidade_anual as $data) {
+                $dates[] = $data;
             }
-            return $dates;
-
+            print_r($dates);
         }
 
-    }
+
+
+
 
 }
+
