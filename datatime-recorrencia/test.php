@@ -31,7 +31,7 @@ if ($datas1 != $resultadoEsperado1) {
 $inicio2 = new \DateTime('2020-02-03');
 $recorrencia2 = [
   'frequencia' => 'semanal',
-  'por_dia' => 1,
+  'por_dia' => 3,
   'quantidade' => 3
 ];
 $resultadoEsperado2 = [

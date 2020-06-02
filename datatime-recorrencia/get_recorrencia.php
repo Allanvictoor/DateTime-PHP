@@ -4,8 +4,11 @@
 function get_recorrencia(\DateTime $inicio, $options)
 {
     $data_inicio = clone $inicio;
-    //$por_dia_mes = $options['por_dia_mes'];
-    //$data_inicio->setDate(2020,02, $por_dia_mes);
+    $data_inicio_recorrencia = clone $inicio;
+    $por_dia_mes = $options['por_dia_mes'];
+    $por_dia = $options['por_dia'];
+    $data_inicio->setDate('2020','02', $por_dia_mes);
+    $data_inicio_recorrencia->setDate('2020','02', $por_dia);
     $data_final = new DateTime($options["termina_em"]);
     $diario = new DateInterval(' P1D');
     $semanal = new DateInterval('P1W');
@@ -96,7 +99,7 @@ function get_recorrencia(\DateTime $inicio, $options)
         if ($options['frequencia'] == 'diario' && $options['termina_em'] == null) {
             $quantidade = $options['quantidade'];
             $quantidade = $quantidade - 1;
-            $periodo = new DatePeriod($data_inicio, $diario, $quantidade);
+            $periodo = new DatePeriod($data_inicio_recorrencia, $diario, $quantidade);
             foreach ($periodo as $data) {
                 $dates[]  = $data;
             }
@@ -106,7 +109,7 @@ function get_recorrencia(\DateTime $inicio, $options)
         if ($options['frequencia'] == 'semanal' && $options['termina_em'] == null) {
             $quantidade = $options['quantidade'];
             $quantidade = $quantidade - 1;
-            $periodo = new DatePeriod($data_inicio, $semanal, $quantidade);
+            $periodo = new DatePeriod($data_inicio_recorrencia, $semanal, $quantidade);
             foreach ($periodo as $data) {
                 $dates[]  = $data;
             }
@@ -116,7 +119,7 @@ function get_recorrencia(\DateTime $inicio, $options)
         if ($options['frequencia'] == 'mensal' && $options['termina_em'] == null) {
             $quantidade = $options['quantidade'];
             $quantidade = $quantidade - 1;
-            $periodo = new DatePeriod($data_inicio, $mensal, $quantidade);
+            $periodo = new DatePeriod($data_inicio_recorrencia, $mensal, $quantidade);
             foreach ($periodo as $data) {
                 $dates[]  = $data;
             }
@@ -126,7 +129,7 @@ function get_recorrencia(\DateTime $inicio, $options)
         if ($options['frequencia'] == 'anual' && $options['termina_em'] == null) {
             $quantidade = $options['quantidade'];
             $quantidade = $quantidade - 1;
-            $periodo = new DatePeriod($data_inicio, $anual, $quantidade);
+            $periodo = new DatePeriod($data_inicio_recorrencia, $anual, $quantidade);
             foreach ($periodo as $data) {
                 $dates[]  = $data;
             }
