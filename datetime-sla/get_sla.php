@@ -2,22 +2,21 @@
 
 function is_horautil(\DateTime $data ) {
 
-        if ($data > new DateTime('8:0:0')) {
-            return true;
-        }
-        if ($data < new DateTime('11:45:0')) {
-            return true;
-        }
-        if ($data > new DateTime('13:0:0')) {
-            return true;
-        }
-        if ($data < new DateTime('18:0:0')) {
-            return true;
-        }
-        else {
-            throw new \Exception('Erro');
-        }
-    return $data;
+    $dataEmMinuto = clone $data;
+
+    $inicioDoPrimeiroTurno = clone $dataEmMinuto->setTime(8, 0, 0);
+    $fimDoPrimeiroTurno = clone $dataEmMinuto->setTime(11, 45, 0);
+    $inicioDoSegundoTurno = clone $dataEmMinuto->setTime(13, 0, 0);
+    $fimDoSegundoTurno = clone $dataEmMinuto->setTime(18, 0, 0);
+
+    if ($dataEmMinuto > $inicioDoPrimeiroTurno && $dataEmMinuto < $fimDoPrimeiroTurno) {
+        return true;
+    }
+    if ($dataEmMinuto > $inicioDoSegundoTurno && $dataEmMinuto < $fimDoSegundoTurno) {
+        return true;
+    }
+    return false;
+
 }
 
 
@@ -27,25 +26,31 @@ function is_horautil(\DateTime $data ) {
  * @return \DateTime data prazo limite com SLA
  * @throws Exception
  */
-function get_sla(\DateTime $inicio, $sla)
-{
 
-    if (! is_numeric($sla)) {
-        throw new \Exception('Informe um valor inteiro para SLA');
-    }
-    $sla = (int) $sla;
-    $slaEmMinutos = $sla * 60;
-    $prazo = clone $inicio;
-    $i = 0;
-    if (is_horautil($inicio)) {
-        while ($i <= $slaEmMinutos) {
-            $i++;
+
+    function get_sla(\DateTime $inicio, $sla)
+    {
+        if (!is_numeric($sla)) {
+            throw new \Exception('Informe um valor inteiro para SLA');
         }
-            $prazo->add(new DateInterval("PT{$i}M"));
+        $sla = (int)$sla;
 
-    }
+        // ao converter pra minutos, podemos facilitar as coisas
+        $slaEmMinutos = $sla * 60;
 
+        $prazo = new DateTime($inicio->format('Y-m-d H:i'));
 
-         return $prazo;
+        $i = 0;
+        while ($i < $slaEmMinutos) {
+            // - adicione 1 minuto em $prazo
+
+            if (is_horautil($prazo)) {
+                $i++;
+            }
+        }
+
+        return $prazo;
 
 }
+
+
