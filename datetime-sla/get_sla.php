@@ -2,21 +2,28 @@
 
 function is_horautil(\DateTime $data ) {
 
-    $dataEmMinuto = clone $data;
+    $data_inicio = clone $data;
+    $confere_dia = $data_inicio->format('Y-m-d');
+    $confere_dia = date('w', strtotime($confere_dia));
 
-    $inicioDoPrimeiroTurno = clone $dataEmMinuto->setTime(8, 0, 0);
-    $fimDoPrimeiroTurno = clone $dataEmMinuto->setTime(11, 45, 0);
-    $inicioDoSegundoTurno = clone $dataEmMinuto->setTime(13, 0, 0);
-    $fimDoSegundoTurno = clone $dataEmMinuto->setTime(18, 0, 0);
+    $inicioDoPrimeiroTurno = clone $data_inicio->setTime(8, 0, 0);
+    $fimDoPrimeiroTurno = clone $data_inicio->setTime(11, 45, 0);
+    $inicioDoSegundoTurno = clone $data_inicio->setTime(13, 0, 0);
+    $fimDoSegundoTurno = clone $data_inicio->setTime(18, 0, 0);
 
-    if ($dataEmMinuto > $inicioDoPrimeiroTurno && $dataEmMinuto < $fimDoPrimeiroTurno) {
+
+    if ($data_inicio > $inicioDoPrimeiroTurno && $data_inicio < $fimDoPrimeiroTurno) {
         return true;
     }
-    if ($dataEmMinuto > $inicioDoSegundoTurno && $dataEmMinuto < $fimDoSegundoTurno) {
+    if ($data_inicio > $inicioDoSegundoTurno && $data_inicio < $fimDoSegundoTurno) {
         return true;
     }
+
+    if($confere_dia == 0 || $confere_dia == 6){
+        return false;
+    }
+
     return false;
-
 }
 
 
