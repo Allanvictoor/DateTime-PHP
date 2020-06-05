@@ -46,14 +46,14 @@ function is_horautil(\DateTime $data ) {
         $slaEmMinutos = $sla * 60;
 
         $prazo = new DateTime($inicio->format('Y-m-d H:i'));
-
         $i = 0;
         while ($i < $slaEmMinutos) {
             // - adicione 1 minuto em $prazo
-
             if (is_horautil($prazo)) {
                 $i++;
             }
+            $prazo->add(new DateInterval("PT{$slaEmMinutos}M"));
+
         }
 
         return $prazo;
