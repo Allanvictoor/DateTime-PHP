@@ -3,32 +3,47 @@
 
 function get_recorrencia(\DateTime $inicio, $options)
 {
-    $dataInicioRecorrencia = clone $inicio;
-    $inicio->setDate($inicio, $inicio, $options['por_dia_mes']);
-
-    $diario = new DateInterval(' P1D');
-    $semanal = new DateInterval('P1W');
-    $mensal = new DateInterval('P1M');
-    $anual = new DateInterval('P1Y');
+    if ($options['quantidade'] == null && $options['termina_em'] == null ) {
+        throw new \Exception('A quantidade ou a data final devem ser passada');
+    }
+    if ($options['quantidade'] != null && ($options['quantidade'] > 1000 || $options['quantidade'] < 0)) {
+        throw new \Exception('A quantidade não deve ser zero e deve ser menor ou igual a 1000');
+    }
 
     $dates = [];
 
-    if ($options['termina_em'] == true) {
-        if ($options['frequencia'] == 'diaria') {
-            $periodo = new DatePeriod($inicio, $diario, $options['termina_em']);
-        }
-        if ($options['frequencia'] == 'semanal') {
-            $periodo = new DatePeriod($inicio, $semanal, $options['termina_em']);
-        }
-        if ($options['frequencia'] == 'mensal') {
-            $periodo = new  DatePeriod($inicio, $mensal, $options['termina_em']);
-        }
-        if ($options['frequencia'] == 'anual') {
-            $periodo = new DatePeriod($inicio, $anual, $options['termina_em']);
-        }
-        foreach ($periodo as $data) {
-            $dates[] = $data;
-        }
+    switch ($options['frequencia']) {
+        case 'diario':
+            $periodo = new DateInterval('P1D');
+            break;
+        case 'semanal':
+            $periodo = new DateInterval('P1W');
+            break;
+        case 'mensal':
+            $periodo = new DateInterval('P1M');
+            break;
+        case 'anual':
+            $periodo = new DateInterval('P1Y');
+            break;
+        default:
+            throw new \Exception('É nessesario passar a frequencia');
     }
+
+    if ($options['quantidade'] == NULL && $options['termina_em'] != NULL) {
+        $dataFinal = new DateTime($options['termina_em']);
+        $dataFinal = $dataFinal->add($periodo);
+    }
+    if ($options['quantidade'] != NULL && $options['termina_em'] == NULL) {
+        $dataFinal = $options['quantidade'] - 1;
+    }
+
+    $recorrencia = new DatePeriod($inicio, $periodo, $dataFinal);
+
+    foreach ($recorrencia as $data) {
+        $dates[] = $data;
+    }
+    print_r($dates);
+
+
     return $dates;
 }
