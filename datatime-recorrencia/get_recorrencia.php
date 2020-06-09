@@ -1,6 +1,5 @@
 <?php
 
-
 function get_recorrencia(\DateTime $inicio, $options)
 {
     if ($options['quantidade'] == null && $options['termina_em'] == null ) {
@@ -9,8 +8,6 @@ function get_recorrencia(\DateTime $inicio, $options)
     if ($options['quantidade'] != null && ($options['quantidade'] > 1000 || $options['quantidade'] < 0)) {
         throw new \Exception('A quantidade não deve ser zero e deve ser menor ou igual a 1000');
     }
-
-    $dates = [];
 
     switch ($options['frequencia']) {
         case 'diario':
@@ -36,14 +33,11 @@ function get_recorrencia(\DateTime $inicio, $options)
     if ($options['quantidade'] != NULL && $options['termina_em'] == NULL) {
         $dataFinal = $options['quantidade'] - 1;
     }
-
+    $dates = [];
     $recorrencia = new DatePeriod($inicio, $periodo, $dataFinal);
 
     foreach ($recorrencia as $data) {
         $dates[] = $data;
     }
-    print_r($dates);
-
-
     return $dates;
 }

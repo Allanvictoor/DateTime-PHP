@@ -7,7 +7,6 @@ include 'get_recorrencia.php';
 $inicio1 = new \DateTime('2020-02-01');
 $recorrencia1 = [
   'frequencia' => 'mensal',
-  'por_dia_mes' => 1,
   'termina_em'=> '2020-09-01'
 ];
 $resultadoEsperado1 = [
