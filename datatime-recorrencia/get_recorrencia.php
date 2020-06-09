@@ -33,6 +33,7 @@ function get_recorrencia(\DateTime $inicio, $options)
     if ($options['quantidade'] != NULL && $options['termina_em'] == NULL) {
         $dataFinal = $options['quantidade'] - 1;
     }
+
     $dates = [];
     $recorrencia = new DatePeriod($inicio, $periodo, $dataFinal);
 
