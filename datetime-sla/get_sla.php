@@ -2,7 +2,7 @@
 
 function is_horautil(\DateTime $data)
 {
-    $horarioDoChamado = $data->format('H:i:s');
+    $slaChamdo = $data->format('H:i:s');
     $inicioPrimeiroTurno = new DateTime('08:00:01');
     $fimPrimeiroTurno = new DateTime('11:45:01');
     $inicioSegundoTurno = new DateTime('13:00:01');
@@ -19,13 +19,13 @@ function is_horautil(\DateTime $data)
     if ($diaDaSemana == 0 && $diaDaSemana == 6) {
         return false;
     }
-    if ($horarioDoChamado < $inicioSegundoTurno && $horarioDoChamado > $fimPrimeiroTurno) {
+    if ($slaChamdo < $inicioSegundoTurno && $slaChamdo > $fimPrimeiroTurno) {
         return false;
     }
-    if ($horarioDoChamado > $fimSegundoTurno) {
+    if ($slaChamdo > $fimSegundoTurno) {
         return false;
     }
-    if ($horarioDoChamado < $inicioPrimeiroTurno) {
+    if ($slaChamdo < $inicioPrimeiroTurno) {
         return false;
     }
     return true;
