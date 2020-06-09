@@ -21,14 +21,10 @@ O seu código precisa ser adicionado no script get_reccorrencia.php dentro da fu
 
 Ao receber uma data de início, exemplo '2020-01-20' e uma configuração de repetição você deverá retornar à chamada com um array de datas. Uma repetição (que será um array) poderá ter as seguintes configurações:
 - frequencia: (string) diaria|semanal|mensal|anual
-- por_dia: (integer) 1-7 <br>Representa os dias da semana de segunda à domingo
-- por_mes: (integer) 1 a 12 <br>Representa os meses do ano de janeiro a dezembro
-- por_dia_mes: (integer) 1-31 <br> Representa os dias do mês de 01 a 31
 - termina_em: (datetime) <br>uma data para término da repetição
 - quantidade: (integer) 0-1000 <br>um número de repetições desejadas.
 
 Observações:
-- No uso da configuração por_dia_mes em meses que não tiverem 30 ou 31 dias, você precisa jogar para o próximo dia válido.
 - No uso da configuração quantidade esta se sobrepõe a data de término, se informada.
 - A configuração quantidade ou termina_em devem ser informados obrigatoriamente para uma repetição.
 - Você pode criar outras funções no projeto mas não pode alterar a declaração da função get_recorrencia no arquivo get_recorrencia.php
@@ -45,7 +41,6 @@ $inicio1 = new \DateTime('2020-02-01');
 
 $recorrencia1 = [
   'frequencia' => 'mensal',
-  'por_dia_mes' => 1,
   'termina_em'=> '2020-09-01'
 ];
 
@@ -71,7 +66,6 @@ $inicio2 = new \DateTime('2020-02-03');
 
 $recorrencia2 = [
   'frequencia' => 'semanal',
-  'por_dia' => 1,
   'quantidade' => 3
 ];
 
