@@ -1,20 +1,34 @@
 <?php
 
-function is_horautil(\DateTime $data ) {
+function is_horautil(\DateTime $data)
+{
+    $horarioDoChamado = $data->format('H:i:s');
+    $inicioPrimeiroTurno = new DateTime('08:00:01');
+    $fimPrimeiroTurno = new DateTime('11:45:01');
+    $inicioSegundoTurno = new DateTime('13:00:01');
+    $fimSegundoTurno = new DateTime('18:00:01');
 
-    $inicioDoPrimeiroTurno = clone $data->setTime(8, 0, 0);
-    $fimDoPrimeiroTurno = clone $data->setTime(11, 45, 0);
-    $inicioDoSegundoTurno = clone $data->setTime(13, 0, 0);
-    $fimDoSegundoTurno = clone $data->setTime(18, 0, 0);
+    $inicioPrimeiroTurno = $inicioPrimeiroTurno->format('H:i:s');
+    $fimPrimeiroTurno = $fimPrimeiroTurno->format('H:i:s');
+    $inicioSegundoTurno = $inicioSegundoTurno->format('H:i:s');
+    $fimSegundoTurno = $fimSegundoTurno->format('H:i:s');
 
-    if ($data > $inicioDoPrimeiroTurno && $data < $fimDoPrimeiroTurno) {
-        return true;
+    $diaDaSemana = $data->format('Y-m-d');
+    $diaDaSemana = date('w', strtotime($diaDaSemana));
+
+    if ($diaDaSemana == 0 && $diaDaSemana == 6) {
+        return false;
     }
-    if ($data > $inicioDoSegundoTurno && $data < $fimDoSegundoTurno) {
-        return true;
+    if ($horarioDoChamado < $inicioSegundoTurno && $horarioDoChamado > $fimPrimeiroTurno) {
+        return false;
     }
-    return $data;
-    var_dump($data);
+    if ($horarioDoChamado > $fimSegundoTurno) {
+        return false;
+    }
+    if ($horarioDoChamado < $inicioPrimeiroTurno) {
+        return false;
+    }
+    return true;
 }
 /**
  * @param \DateTime $inicio data de início
@@ -22,27 +36,23 @@ function is_horautil(\DateTime $data ) {
  * @return \DateTime data prazo limite com SLA
  * @throws Exception
  */
-    function get_sla(\DateTime $inicio, $sla)
-    {
-        if (!is_numeric($sla)) {
-            throw new \Exception('Informe um valor inteiro para SLA');
+function get_sla(\DateTime $inicio, $sla)
+{
+    if (!is_numeric($sla)) {
+        throw new \Exception('Informe um valor inteiro para SLA');
+    }
+
+    $sla = (int) $sla;
+    $slaEmMinutos = $sla * 60;
+    $prazo = new DateTime($inicio->format('Y-m-d H:i'));
+    $i = 0;
+
+    while ($i < $slaEmMinutos) {
+        $prazo->add(new DateInterval('PT1M'));
+        if (is_horautil($prazo)) {
+            $i++;
         }
-        $sla = (int)$sla;
-        // ao converter pra minutos, podemos facilitar as coisas
-        $slaEmMinutos = $sla * 60;
-
-        $prazo = new DateTime($inicio->format('Y-m-d H:i'));
-        $i = 0;
-        while ($i < $slaEmMinutos) {
-
-            if (is_horautil($prazo)) {
-                $i++;
-            }
-            $prazo->add(new DateInterval("PT{$i}M"));
-        }
-        return $prazo;
-
-
+    }
+    return $prazo;
 }
-
 
