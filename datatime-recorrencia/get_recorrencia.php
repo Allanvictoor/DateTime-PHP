@@ -5,7 +5,7 @@ function get_recorrencia(\DateTime $inicio, $options)
     if ($options['quantidade'] == null && $options['termina_em'] == null ) {
         throw new \Exception('A quantidade ou a data final devem ser passada');
     }
-    if ($options['quantidade'] != null && ($options['quantidade'] > 1000 || $options['quantidade'] < 0)) {
+    if ($options['quantidade'] != null && (($options['quantidade'] > 1000 || $options['quantidade'] < 0))) {
         throw new \Exception('A quantidade não deve ser zero e deve ser menor ou igual a 1000');
     }
 
@@ -23,19 +23,19 @@ function get_recorrencia(\DateTime $inicio, $options)
             $periodo = new DateInterval('P1Y');
             break;
         default:
-            throw new \Exception('É nessesario passar a frequencia');
+            throw new \Exception('É necesario passar a frequência');
     }
 
     if ($options['quantidade'] == NULL && $options['termina_em'] != NULL) {
-        $dataFinal = new DateTime($options['termina_em']);
-        $dataFinal = $dataFinal->add($periodo);
+        $fim = new DateTime($options['termina_em']);
+        $fim = $fim->add($periodo);
     }
     if ($options['quantidade'] != NULL && $options['termina_em'] == NULL) {
-        $dataFinal = $options['quantidade'] - 1;
+        $fim = $options['quantidade'] - 1;
     }
 
+    $recorrencia = new DatePeriod($inicio, $periodo, $fim);
     $dates = [];
-    $recorrencia = new DatePeriod($inicio, $periodo, $dataFinal);
 
     foreach ($recorrencia as $data) {
         $dates[] = $data;
