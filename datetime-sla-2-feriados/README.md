@@ -10,7 +10,9 @@
  
  - Este método terá um array declarado com os feriados sendo:
  
- $feriados = ['2020-01-01', ..., ..., '2020-12-25'];
+ ```php
+ $feriados = ['2020-01-01', '2020-12-25']; // você pode incrementar a vontade aqui as datas
+ ```
  
  Deste modo, um dia em que for feriado, não deverá ser contado SLA.
  
