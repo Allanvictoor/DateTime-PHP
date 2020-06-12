@@ -1,9 +1,10 @@
 <?php
 
-function is_diaUtil(\DateTime $dataFeriado, $data) {
-    $dataFeriado->format();
-    $diaDaSemana = $data->format('w');
-    $diaDoAno = $data->format('Y-m-d');
+function is_diaUtil(\DateTime $dataFeriado) {
+
+    $diaDaSemana = $dataFeriado->format('w');
+    $diaDoAno = $dataFeriado->format('Y-m-d');
+
     $diasNaoUteis = [0,6];
     $feriados = ['2020-01-01', '2020-02-24', '2020-02-25', '2020-04-10', '2020-05-01', '2020-06-11',
         '2020-09-07', '2020-10-12', '2020-11-20', '2020-11-15', '2020-12-25'];
@@ -21,14 +22,10 @@ function is_horautil(\DateTime $data)
 {
     $slaChamado = $data->format('H:i:s');
 
-
     $inicioPrimeiroTurno = '08:00:00';
     $fimPrimeiroTurno = '11:45:00';
     $inicioSegundoTurno = '13:00:00';
     $fimSegundoTurno = '18:00:00';
-
-
-
 
     if ($slaChamado < $inicioSegundoTurno && $slaChamado >= $fimPrimeiroTurno) {
         return false;
@@ -49,6 +46,7 @@ function is_horautil(\DateTime $data)
  */
 function get_sla(\DateTime $inicio, $sla)
 {
+
     if (!is_numeric($sla)) {
         throw new \Exception('Informe um valor inteiro para SLA');
     }
@@ -59,6 +57,7 @@ function get_sla(\DateTime $inicio, $sla)
     $i = 0;
 
     if (is_diaUtil($prazo)) {
+        $prazo->add(new DateInterval('P1D'));
         while ($i < $slaEmMinutos) {
             $prazo->add(new DateInterval('PT1M'));
             if (is_horautil($prazo)) {
@@ -66,6 +65,7 @@ function get_sla(\DateTime $inicio, $sla)
             }
         }
     }
+
     return $prazo;
 }
 
