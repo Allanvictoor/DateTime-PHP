@@ -53,8 +53,6 @@ function get_sla(\DateTime $inicio, $sla)
     $prazo = clone $inicio;
     $i = 0;
 
-
-
     while ($i < $slaEmMinutos) {
         if (!is_diaUtil($prazo)) {
             $prazo->modify('+1 day');
