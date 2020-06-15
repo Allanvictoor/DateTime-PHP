@@ -46,7 +46,6 @@ function is_horautil(\DateTime $data)
  */
 function get_sla(\DateTime $inicio, $sla)
 {
-
     if (!is_numeric($sla)) {
         throw new \Exception('Informe um valor inteiro para SLA');
     }
@@ -58,14 +57,14 @@ function get_sla(\DateTime $inicio, $sla)
 
     if (is_diaUtil($prazo)) {
         $prazo->add(new DateInterval('P1D'));
+    }
+
         while ($i < $slaEmMinutos) {
             $prazo->add(new DateInterval('PT1M'));
             if (is_horautil($prazo)) {
                 $i++;
             }
         }
-    }
-
     return $prazo;
 }
 
