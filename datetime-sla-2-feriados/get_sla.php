@@ -1,20 +1,18 @@
 <?php
 
-function is_diaUtil(\DateTime $dataFeriado) {
-
-    $diaDaSemana = $dataFeriado->format('w');
-    $diaDoAno = $dataFeriado->format('Y-m-d');
+function is_diautil(\DateTime $data) {
 
     $diasNaoUteis = [0,6];
+    if (in_array($data->format('w'), $diasNaoUteis)) {
+        return false;
+    }
+
     $feriados = ['2020-01-01', '2020-02-24', '2020-02-25', '2020-04-10', '2020-05-01', '2020-06-11',
         '2020-09-07', '2020-10-12', '2020-11-20', '2020-11-15', '2020-12-25'];
+    if (in_array($data->format('Y-m-d'), $feriados)) {
+        return false;
+    }
 
-    if (in_array($diaDaSemana, $diasNaoUteis)) {
-        return false;
-    }
-    if (in_array($diaDoAno, $feriados)) {
-        return false;
-    }
     return  true;
 }
 
@@ -55,16 +53,19 @@ function get_sla(\DateTime $inicio, $sla)
     $prazo = clone $inicio;
     $i = 0;
 
-    if (is_diaUtil($prazo)) {
-        $prazo->add(new DateInterval('P1D'));
-    }
 
-        while ($i < $slaEmMinutos) {
-            $prazo->add(new DateInterval('PT1M'));
-            if (is_horautil($prazo)) {
-                $i++;
-            }
+
+    while ($i < $slaEmMinutos) {
+        if (!is_diaUtil($prazo)) {
+            $prazo->modify('+1 day');
+            continue;
         }
+
+        if (is_horautil($prazo)) {
+            $i++;
+        }
+        $prazo->add(new DateInterval('PT1M'));
+    }
     return $prazo;
 }
 
