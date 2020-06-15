@@ -55,7 +55,7 @@ function get_sla(\DateTime $inicio, $sla)
 
     while ($i < $slaEmMinutos) {
         if (!is_diaUtil($prazo)) {
-            $prazo->modify('+1 day');
+            $prazo->modify('tomorrow');
             continue;
         }
 
